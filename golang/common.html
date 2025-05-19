@@ -275,6 +275,19 @@
             
         </li>
     
+        <li class="chapter " data-level="1.3.7" data-path="../mysql/slow-sql.html">
+            
+                <a href="../mysql/slow-sql.html">
+            
+                    
+                    07.slow sql
+            
+                </a>
+            
+
+            
+        </li>
+    
 
             </ul>
             
@@ -752,10 +765,13 @@
 }
 </code></pre>
 <h1 id="什么是data-race？go中如何定位和避免？">什么是Data Race？go中如何定位和避免？</h1>
-<blockquote>
+<ul>
+<li>Data Race [竞赛]，内存竞争<blockquote>
 <p>Data Race 是指两个或多个 goroutine 并发访问共享变量，并且至少一个是写操作，且这些操作没有适当的同步机制。
 使用 -race 选项检测数据竞争。</p>
 </blockquote>
+</li>
+</ul>
 <h4 id="避免方法：">避免方法：</h4>
 <ul>
 <li>使用互斥锁 sync.Mutex 来保护共享资源。</li>
@@ -779,6 +795,71 @@
 <li>那么当前的互斥锁就会切换回正常模式。</li>
 </ul>
 </blockquote>
+<h4 id="syncmutex-的内部结构">sync.Mutex 的内部结构</h4>
+<pre><code class="lang-go"><span class="hljs-keyword">type</span> Mutex <span class="hljs-keyword">struct</span> {
+    state <span class="hljs-type">int32</span>
+    sema  <span class="hljs-type">uint32</span>
+}
+</code></pre>
+<ul>
+<li>state 是锁的状态标志位，包含两部分信息：<ul>
+<li>最低位：锁是否被占用（locked 位）。</li>
+<li>其他位：表示等待者数量（woken, starving 等，组合出完整状态）。</li>
+</ul>
+</li>
+<li>sema 是用于协调阻塞和唤醒 goroutine 的信号量。</li>
+</ul>
+<h4 id="加锁（lock）流程">加锁（Lock）流程</h4>
+<ul>
+<li>尝试 CAS 抢占锁（乐观锁）<pre><code class="lang-go"><span class="hljs-keyword">if</span> atomic.CompareAndSwapInt32(&amp;m.state, <span class="hljs-number">0</span>, mutexLocked) {
+  <span class="hljs-keyword">return</span> <span class="hljs-comment">// 加锁成功，无竞争</span>
+}
+</code></pre>
+</li>
+<li>失败 → 表示锁被占用，进入“慢路径”<ul>
+<li>把自己标记为等待者。</li>
+<li>阻塞当前 goroutine（挂起），等待解锁后被唤醒。</li>
+<li>如果处于 "starvation mode"（饥饿模式），那么直接把锁传递给下一个等待者</li>
+</ul>
+</li>
+</ul>
+<h4 id="解锁（unlock）流程">解锁（Unlock）流程</h4>
+<ul>
+<li>原子地将 locked 标志位清除（即设置为 0）。</li>
+<li>如果还有等待者，则唤醒一个</li>
+<li>支持“饥饿模式”：长时间未获得锁的 goroutine 会被优先唤醒，避免“饿死”。</li>
+</ul>
+<h4 id="饥饿模式（starvation-mode）">饥饿模式（Starvation Mode）</h4>
+<blockquote>
+<p>Go 的 Mutex 为了避免某些 goroutine 一直拿不到锁，引入了饥饿模式策略</p>
+</blockquote>
+<ul>
+<li>如果某个 goroutine 等待超过 1ms，会将锁转入饥饿模式。</li>
+<li>在饥饿模式下<ul>
+<li>当前锁释放时，锁会直接交给最早等待的 goroutine。</li>
+<li>不再让新来的 goroutine 竞争，直到没有等待者为止。</li>
+</ul>
+</li>
+</ul>
+<h4 id="底层机制：信号量--调度器挂起唤醒">底层机制：信号量 + 调度器挂起唤醒</h4>
+<blockquote>
+<p>底层是依靠 Go runtime 的信号量原语（runtime_Semacquire, runtime_Semrelease）实现阻塞与唤醒</p>
+</blockquote>
+<ul>
+<li>不会一直自旋浪费 CPU。</li>
+<li>实际是通过调度器挂起 goroutine，释放 CPU 使用权，等锁可用时再恢复运行。</li>
+</ul>
+<pre><code class="lang-plaintext">Lock() →
+ ┌────────────┐
+ │ state = 0? │──────► 成功加锁 (返回)
+ └────────────┘
+       │
+       ▼
+等待队列中挂起当前 goroutine (sema)
+       │
+       ▼
+   等待 Unlock 唤醒
+</code></pre>
 
                                 
                                 </section>
@@ -818,7 +899,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"05.其他问题","level":"1.2.5","depth":2,"next":{"title":"mysql面试题","level":"1.3","depth":1,"ref":"","articles":[{"title":"01.mvcc","level":"1.3.1","depth":2,"path":"mysql/mvcc.md","ref":"mysql/mvcc.md","articles":[]},{"title":"02.b+Tree","level":"1.3.2","depth":2,"path":"mysql/b+tree.md","ref":"mysql/b+tree.md","articles":[]},{"title":"03.binlog","level":"1.3.3","depth":2,"path":"mysql/binlog.md","ref":"mysql/binlog.md","articles":[]},{"title":"04.xa&&tcc","level":"1.3.4","depth":2,"path":"mysql/xa+tcc.md","ref":"mysql/xa+tcc.md","articles":[]},{"title":"05.ID","level":"1.3.5","depth":2,"path":"mysql/id.md","ref":"mysql/id.md","articles":[]},{"title":"06.data sync","level":"1.3.6","depth":2,"path":"mysql/datasync.md","ref":"mysql/datasync.md","articles":[]}]},"previous":{"title":"04.channel","level":"1.2.4","depth":2,"path":"golang/channel.md","ref":"golang/channel.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"golang/common.md","mtime":"2025-05-16T18:19:22.120Z","type":"markdown"},"gitbook":{"version":"6.0.3","time":"2025-05-19T03:14:16.246Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"05.其他问题","level":"1.2.5","depth":2,"next":{"title":"mysql面试题","level":"1.3","depth":1,"ref":"","articles":[{"title":"01.mvcc","level":"1.3.1","depth":2,"path":"mysql/mvcc.md","ref":"mysql/mvcc.md","articles":[]},{"title":"02.b+Tree","level":"1.3.2","depth":2,"path":"mysql/b+tree.md","ref":"mysql/b+tree.md","articles":[]},{"title":"03.binlog","level":"1.3.3","depth":2,"path":"mysql/binlog.md","ref":"mysql/binlog.md","articles":[]},{"title":"04.xa&&tcc","level":"1.3.4","depth":2,"path":"mysql/xa+tcc.md","ref":"mysql/xa+tcc.md","articles":[]},{"title":"05.ID","level":"1.3.5","depth":2,"path":"mysql/id.md","ref":"mysql/id.md","articles":[]},{"title":"06.data sync","level":"1.3.6","depth":2,"path":"mysql/datasync.md","ref":"mysql/datasync.md","articles":[]},{"title":"07.slow sql","level":"1.3.7","depth":2,"path":"mysql/slow-sql.md","ref":"mysql/slow-sql.md","articles":[]}]},"previous":{"title":"04.channel","level":"1.2.4","depth":2,"path":"golang/channel.md","ref":"golang/channel.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"golang/common.md","mtime":"2025-05-19T11:30:59.484Z","type":"markdown"},"gitbook":{"version":"6.0.3","time":"2025-05-19T14:07:51.083Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
