@@ -1,0 +1,821 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <title>03.binlog · HonKit</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 6.0.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/@honkit/honkit-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/@honkit/honkit-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="xa+tcc.html" />
+    
+    
+    <link rel="prev" href="b+tree.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book honkit-cloak">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" >
+            
+                <span>
+            
+                    
+                    golang面试题
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../golang/array.html">
+            
+                <a href="../golang/array.html">
+            
+                    
+                    01.数组
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../golang/slice.html">
+            
+                <a href="../golang/slice.html">
+            
+                    
+                    02.切片
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="../golang/goroutine.html">
+            
+                <a href="../golang/goroutine.html">
+            
+                    
+                    03.协程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="../golang/channel.html">
+            
+                <a href="../golang/channel.html">
+            
+                    
+                    04.channel
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5" data-path="../golang/common.html">
+            
+                <a href="../golang/common.html">
+            
+                    
+                    05.其他问题
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" >
+            
+                <span>
+            
+                    
+                    mysql面试题
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="mvcc.html">
+            
+                <a href="mvcc.html">
+            
+                    
+                    01.mvcc
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="b+tree.html">
+            
+                <a href="b+tree.html">
+            
+                    
+                    02.b+Tree
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.3.3" data-path="binlog.html">
+            
+                <a href="binlog.html">
+            
+                    
+                    03.binlog
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="xa+tcc.html">
+            
+                <a href="xa+tcc.html">
+            
+                    
+                    04.xa&&tcc
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="id.html">
+            
+                <a href="id.html">
+            
+                    
+                    05.ID
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.6" data-path="datasync.html">
+            
+                <a href="datasync.html">
+            
+                    
+                    06.data sync
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" >
+            
+                <span>
+            
+                    
+                    redis面试题
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../redis/save.html">
+            
+                <a href="../redis/save.html">
+            
+                    
+                    01.save
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../redis/string.html">
+            
+                <a href="../redis/string.html">
+            
+                    
+                    02.string
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../redis/exprice.html">
+            
+                <a href="../redis/exprice.html">
+            
+                    
+                    03.缓存过期
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../redis/cluster.html">
+            
+                <a href="../redis/cluster.html">
+            
+                    
+                    04.集群
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="../redis/common.html">
+            
+                <a href="../redis/common.html">
+            
+                    
+                    05.其他问题
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" >
+            
+                <span>
+            
+                    
+                    kafka面试题
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../kafka/send.html">
+            
+                <a href="../kafka/send.html">
+            
+                    
+                    01.send message
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../kafka/costumer.html">
+            
+                <a href="../kafka/costumer.html">
+            
+                    
+                    02.coustomer
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../kafka/common.html">
+            
+                <a href="../kafka/common.html">
+            
+                    
+                    03.其他问题
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" >
+            
+                <span>
+            
+                    
+                    es面试题
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../es/base.html">
+            
+                <a href="../es/base.html">
+            
+                    
+                    01.基础操作
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../es/data.html">
+            
+                <a href="../es/data.html">
+            
+                    
+                    02.其他问题
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" >
+            
+                <span>
+            
+                    
+                    solidity面试题
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../solidity/base.html">
+            
+                <a href="../solidity/base.html">
+            
+                    
+                    01.base
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" data-path="../solidity/error.html">
+            
+                <a href="../solidity/error.html">
+            
+                    
+                    02.error
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.3" data-path="../solidity/event.html">
+            
+                <a href="../solidity/event.html">
+            
+                    
+                    03.event
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.4" data-path="../solidity/call.html">
+            
+                <a href="../solidity/call.html">
+            
+                    
+                    04.call
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.5" data-path="../solidity/abi.html">
+            
+                <a href="../solidity/abi.html">
+            
+                    
+                    05.ABI
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.6" data-path="../solidity/mutil.html">
+            
+                <a href="../solidity/mutil.html">
+            
+                    
+                    06.多签
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.7" data-path="../solidity/proxy.html">
+            
+                <a href="../solidity/proxy.html">
+            
+                    
+                    07.代理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.8" data-path="../solidity/receive.html">
+            
+                <a href="../solidity/receive.html">
+            
+                    
+                    08.ETH转账
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.9" data-path="../solidity/sign.html">
+            
+                <a href="../solidity/sign.html">
+            
+                    
+                    09.签名
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.10" data-path="../solidity/safe.html">
+            
+                <a href="../solidity/safe.html">
+            
+                    
+                    10.安全
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            Published with HonKit
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >03.binlog</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h2 id="mysql-binlog">MySQL binlog</h2>
+<ul>
+<li>MySQL 的 binlog（二进制日志） 是数据库进行 主从复制、数据恢复、增量同步 的关键组件</li>
+<li>它记录了所有导致数据变更的 SQL 语句或行级操作。不同的 binlog 格式决定了记录内容的粒度和解析方式。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>格式</th>
+<th>描述</th>
+<th>典型使用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>STATEMENT</strong></td>
+<td>记录执行的 SQL 语句</td>
+<td>早期版本默认格式，适用于简单场景</td>
+</tr>
+<tr>
+<td><strong>ROW</strong></td>
+<td>记录每一行变更的内容（变化前后）</td>
+<td>高精度数据同步，推荐使用</td>
+</tr>
+<tr>
+<td><strong>MIXED</strong></td>
+<td>自动选择使用 STATEMENT 或 ROW 记录（根据语句类型）</td>
+<td>兼顾兼容性与安全性</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>STATEMENT 模式：原始 SQL 语句，日志量小，占空间少可读性强（容易理解），非确定性语句会引发主从不一致，如：UUID()、NOW()、RAND()、用户函数</li>
+<li>ROW 模式（推荐）：每一行变更前后的数据，完整、准确、无歧义，适合数据同步、解析、恢复，日志体积大</li>
+<li>MIXED 模式：自动在 ROW 和 STATEMENT 之间切换，可安全执行的使用 STATEMENT，含有函数、临时表等复杂情况用 ROW</li>
+</ul>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="b+tree.html" class="navigation navigation-prev " aria-label="Previous page: 02.b+Tree">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="xa+tcc.html" class="navigation navigation-next " aria-label="Next page: 04.xa&&tcc">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"03.binlog","level":"1.3.3","depth":2,"next":{"title":"04.xa&&tcc","level":"1.3.4","depth":2,"path":"mysql/xa+tcc.md","ref":"mysql/xa+tcc.md","articles":[]},"previous":{"title":"02.b+Tree","level":"1.3.2","depth":2,"path":"mysql/b+tree.md","ref":"mysql/b+tree.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"mysql/binlog.md","mtime":"2025-05-16T18:37:04.108Z","type":"markdown"},"gitbook":{"version":"6.0.3","time":"2025-05-19T03:14:16.246Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <noscript>
+        <style>
+            .honkit-cloak {
+                display: block !important;
+            }
+        </style>
+    </noscript>
+    <script>
+        // Restore sidebar state as critical path for prevent layout shift
+        function __init__getSidebarState(defaultValue){
+            var baseKey = "";
+            var key = baseKey + ":sidebar";
+            try {
+                var value = localStorage[key];
+                if (value === undefined) {
+                    return defaultValue;
+                }
+                var parsed = JSON.parse(value);
+                return parsed == null ? defaultValue : parsed;
+            } catch (e) {
+                return defaultValue;
+            }
+        }
+        function __init__restoreLastSidebarState() {
+            var isMobile = window.matchMedia("(max-width: 600px)").matches;
+            if (isMobile) {
+                // Init last state if not mobile
+                return;
+            }
+            var sidebarState = __init__getSidebarState(true);
+            var book = document.querySelector(".book");
+            // Show sidebar if it enabled
+            if (sidebarState && book) {
+                book.classList.add("without-animation", "with-summary");
+            }
+        }
+
+        try {
+            __init__restoreLastSidebarState();
+        } finally {
+            var book = document.querySelector(".book");
+            book.classList.remove("honkit-cloak");
+        }
+    </script>
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/@honkit/honkit-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

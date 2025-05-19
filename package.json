@@ -1,0 +1,19 @@
+{
+  "name": "note-book",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "honkit build",
+    "deploy": "gh-pages -d _book"
+  },
+  "private": true,
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "gh-pages": "^6.3.0",
+    "honkit": "^6.0.3"
+  }
+}
