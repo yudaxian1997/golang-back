@@ -677,22 +677,21 @@
                                 <h2 id="mysql慢查询优化的目标是提升查询效率、减少系统负载">MySQL慢查询优化的目标是提升查询效率、减少系统负载</h2>
 <h4 id="一、定位慢查询">一、定位慢查询</h4>
 <ul>
-<li>开启慢查询日志
-```sql
--- 临时开启
-SET GLOBAL slow_query_log = ON;
-SET GLOBAL slow_query_log_file = '/var/log/mysql/slow.log';
-SET GLOBAL long_query_time = 1; -- 超过1秒的SQL会被记录</li>
+<li>开启慢查询日志</li>
 </ul>
-<p>-- 查看当前配置
-SHOW VARIABLES LIKE '%slow%';</p>
-<pre><code>
-#### 二、分析查询性能
+<pre><code class="lang-sql"><span class="hljs-keyword">SET</span> <span class="hljs-keyword">GLOBAL</span> slow_query_log <span class="hljs-operator">=</span> <span class="hljs-keyword">ON</span>;
+<span class="hljs-keyword">SET</span> <span class="hljs-keyword">GLOBAL</span> slow_query_log_file <span class="hljs-operator">=</span> <span class="hljs-string">'/var/log/mysql/slow.log'</span>;
+<span class="hljs-keyword">SET</span> <span class="hljs-keyword">GLOBAL</span> long_query_time <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; <span class="hljs-comment">-- 超过1秒的SQL会被记录</span>
 
-- 使用 EXPLAIN 查看执行计划，分析是否走了索引、是否存在全表扫描。
-```sql
-EXPLAIN SELECT * FROM users WHERE email = 'test@example.com';
-</code></pre><ul>
+<span class="hljs-keyword">SHOW</span> VARIABLES <span class="hljs-keyword">LIKE</span> <span class="hljs-string">'%slow%'</span>;
+</code></pre>
+<h4 id="二、分析查询性能">二、分析查询性能</h4>
+<ul>
+<li>使用 EXPLAIN 查看执行计划，分析是否走了索引、是否存在全表扫描。</li>
+</ul>
+<pre><code class="lang-sql">EXPLAIN <span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> users <span class="hljs-keyword">WHERE</span> email <span class="hljs-operator">=</span> <span class="hljs-string">'test@example.com'</span>;
+</code></pre>
+<ul>
 <li>重点字段说明:<ul>
 <li>type：连接类型（ALL最差，最好是 const、ref）</li>
 <li>rows：扫描的行数</li>
@@ -865,7 +864,7 @@ EXPLAIN SELECT * FROM users WHERE email = 'test@example.com';
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"07.slow sql","level":"1.3.7","depth":2,"next":{"title":"redis面试题","level":"1.4","depth":1,"ref":"","articles":[{"title":"01.save","level":"1.4.1","depth":2,"path":"redis/save.md","ref":"redis/save.md","articles":[]},{"title":"02.string","level":"1.4.2","depth":2,"path":"redis/string.md","ref":"redis/string.md","articles":[]},{"title":"03.缓存过期","level":"1.4.3","depth":2,"path":"redis/exprice.md","ref":"redis/exprice.md","articles":[]},{"title":"04.集群","level":"1.4.4","depth":2,"path":"redis/cluster.md","ref":"redis/cluster.md","articles":[]},{"title":"05.其他问题","level":"1.4.5","depth":2,"path":"redis/common.md","ref":"redis/common.md","articles":[]}]},"previous":{"title":"06.data sync","level":"1.3.6","depth":2,"path":"mysql/datasync.md","ref":"mysql/datasync.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"mysql/slow-sql.md","mtime":"2025-05-19T14:07:18.775Z","type":"markdown"},"gitbook":{"version":"6.0.3","time":"2025-05-19T14:07:51.083Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"07.slow sql","level":"1.3.7","depth":2,"next":{"title":"redis面试题","level":"1.4","depth":1,"ref":"","articles":[{"title":"01.save","level":"1.4.1","depth":2,"path":"redis/save.md","ref":"redis/save.md","articles":[]},{"title":"02.string","level":"1.4.2","depth":2,"path":"redis/string.md","ref":"redis/string.md","articles":[]},{"title":"03.缓存过期","level":"1.4.3","depth":2,"path":"redis/exprice.md","ref":"redis/exprice.md","articles":[]},{"title":"04.集群","level":"1.4.4","depth":2,"path":"redis/cluster.md","ref":"redis/cluster.md","articles":[]},{"title":"05.其他问题","level":"1.4.5","depth":2,"path":"redis/common.md","ref":"redis/common.md","articles":[]}]},"previous":{"title":"06.data sync","level":"1.3.6","depth":2,"path":"mysql/datasync.md","ref":"mysql/datasync.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"mysql/slow-sql.md","mtime":"2025-05-19T14:10:14.921Z","type":"markdown"},"gitbook":{"version":"6.0.3","time":"2025-05-19T14:10:30.380Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
